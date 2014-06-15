@@ -20,9 +20,9 @@ public class URLReader {
         in.close();   */
     }
     
-    public void readLineFromBuffer() throws Exception {
-        String line = this.buffer.readLine();
-        if(line != null)
-            System.out.println(line);
+    public String readLineFromBuffer() throws Exception {
+        return this.buffer.readLine();
     }
+    
+    	
 }
