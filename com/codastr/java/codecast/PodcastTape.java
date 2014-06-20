@@ -48,7 +48,7 @@ public class PodcastTape {
     if(m.matches() == false)
     	throw new Exception("Invalid xml-feed");
     
-    String fullXml = xml.readLineFromBuffer();
+    
   }
   
 }

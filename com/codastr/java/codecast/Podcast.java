@@ -1,6 +1,6 @@
 package com.codastr.java.codecast;
 
-class Podcast {
+public class Podcast {
   
   
   
