@@ -1,4 +1,4 @@
-package com.bestsyntax.java.codecast;
+package com.codastr.java.codecast;
 
 class Podcast {
   

@@ -1,4 +1,4 @@
-package com.bestsyntax.java.codecast;
+package com.codastr.java.codecast;
 
 import java.net.*;
 import java.io.*;
@@ -49,7 +49,6 @@ class PodcastTape {
     	throw new Exception("Invalid xml-feed");
     
     String fullXml = xml.readLineFromBuffer();
-    System.out.println(fullXml);
   }
   
 }
