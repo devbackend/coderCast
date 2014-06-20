@@ -1,4 +1,4 @@
-package com.codastr.java.codecast;
+import com.codastr.java.codecast.*;
 
 public class Init {
   

@@ -4,7 +4,7 @@ import java.net.*;
 import java.io.*;
 import java.util.regex.*;
 
-class PodcastTape {
+public class PodcastTape {
   
   public static final int WRONG_CHANEL_LENGTH = 0;
   public static final String XML_FEED_HEADER  = "\\<\\?xml version=\"\\d+\\.\\d+\" encoding=\"[a-zA-Z0-9-]+\"\\s*\\?\\>";
