@@ -34,7 +34,11 @@ public class PodcastTape {
     }
     
   }
-  
+
+  public ArrayList<Object> getPodcastList() {
+    return podcastList;
+  }
+
   public void setChanelUrl(String chanelUrl) throws Exception {
     
     if(chanelUrl.length() < WRONG_CHANEL_LENGTH)
@@ -72,18 +76,18 @@ public class PodcastTape {
     //инициализируем имя подкаст-ленты
     this.setName(podcastTitles.item(0).getTextContent());
 
-    //initialise podacst items from elements
+    //получаем все подкасты из xml
     NodeList podcastItems = doc.getElementsByTagName("item");
 
+    //производим само заполнение массива подкастов
     for(int i=0; i < podcastItems.getLength(); i++)
     {
-        this.podcastList.add(new Podcast(podcastItems.item(i)));
+        this.podcastList.add(new Podcast((Element) podcastItems.item(i)));
     }
 
   }
 
-  private Document parseXML(InputStream stream) throws Exception
-  {
+  private Document parseXML(InputStream stream) throws Exception {
       DocumentBuilderFactory objDocumentBuilderFactory = null;
       DocumentBuilder objDocumentBuilder = null;
       Document doc = null;
