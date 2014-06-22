@@ -13,16 +13,19 @@ public class URLReader {
         this.url = new URL(url);
         this.urlConnection = this.url.openConnection();
         this.buffer = new BufferedReader(new InputStreamReader(this.urlConnection.getInputStream()));
-        
-        /*String inputLine;
-        while ((inputLine = in.readLine()) != null) 
-            System.out.println(inputLine);
-        in.close();   */
     }
+
     
     public String readLineFromBuffer() throws Exception {
         return this.buffer.readLine();
     }
-    
+
+    public BufferedReader getBuffer() {
+        return this.buffer;
+    }
+
+    public URLConnection getUrlConnection() {
+        return this.urlConnection;
+    }
     	
 }
