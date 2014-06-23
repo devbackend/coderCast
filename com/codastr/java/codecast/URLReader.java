@@ -15,6 +15,9 @@ public class URLReader {
         this.buffer = new BufferedReader(new InputStreamReader(this.urlConnection.getInputStream()));
     }
 
+	public int readChar() throws IOException {
+		return this.buffer.read();
+	}
     
     public String readLineFromBuffer() throws Exception {
         return this.buffer.readLine();

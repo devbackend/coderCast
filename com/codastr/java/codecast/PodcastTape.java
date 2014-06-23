@@ -27,8 +27,9 @@ public class PodcastTape {
   public PodcastTape(String chanelUrl) throws Exception {
     try {
     	this.setChanelUrl(chanelUrl);
-
-    	this.fill();
+		this.fill();
+		File podcastFolder = new File(this.name);
+		podcastFolder.mkdir();
     } catch(Exception e) {
     	System.out.println(e.getMessage());
     }

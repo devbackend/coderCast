@@ -1,5 +1,9 @@
 package com.codastr.java.codecast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
@@ -10,6 +14,17 @@ import org.w3c.dom.Element;
 
 public class Podcast {
 
+	protected String title, link, pubDate, description, mp3;
+	protected int fileSize;	
+	
+	public void setFileSize(int fileSize) {
+		this.fileSize = fileSize;
+	}
+	
+	public int getFileSize() {
+		return this.fileSize;
+	}
+	
     public String getTitle() {
         return title;
     }
@@ -50,8 +65,6 @@ public class Podcast {
         this.mp3 = mp3;
     }
 
-    protected String title, link, pubDate, description, mp3;
-
   public Podcast() {
 
   }
@@ -63,6 +76,24 @@ public class Podcast {
       this.setPubDate(item.getElementsByTagName("pubDate").item(0).getTextContent());
       this.setDescription(item.getElementsByTagName("description").item(0).getTextContent());
       this.setMp3(item.getElementsByTagName("enclosure").item(0).getAttributes().item(2).getTextContent());
+      this.setFileSize(Integer.parseInt(item.getElementsByTagName("enclosure").item(0).getAttributes().item(0).getTextContent()));
+  }
+  
+  //загрузка подкастов
+  public void download(String directoryDestinationName) throws Exception {
+  	URLReader mp3Url = new URLReader(this.mp3);
+  	int b;
+  	File podcastFilename = new File(directoryDestinationName+'/'+this.getTitle()+".mp3");
+  	podcastFilename.createNewFile();
+  	
+  	FileOutputStream openedFile = new FileOutputStream(podcastFilename);
+  	/*
+  	while((b = mp3Url.readChar()) != null)
+	{
+		openedFile.write(b);
+	}
+	*/
+	System.out.println(this.getFileSize());
   }
   
 }
