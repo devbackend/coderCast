@@ -8,7 +8,7 @@ public class Init {
     
     PodcastTape radiot = new PodcastTape("http://feeds.rucast.net/radio-t");
 	
-	Podcast p = (Podcast) radiot.getPodcastList().get(1);
+	Podcast p = (Podcast) radiot.getPodcastList().get(3);
 	p.download(radiot.getName());
     
   }

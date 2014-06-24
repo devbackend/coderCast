@@ -82,18 +82,23 @@ public class Podcast {
   //загрузка подкастов
   public void download(String directoryDestinationName) throws Exception {
   	URLReader mp3Url = new URLReader(this.mp3);
-  	int b;
   	File podcastFilename = new File(directoryDestinationName+'/'+this.getTitle()+".mp3");
+  	int podcastFileSize = this.getFileSize();
+		int symb;
+		
   	podcastFilename.createNewFile();
   	
   	FileOutputStream openedFile = new FileOutputStream(podcastFilename);
-  	/*
-  	while((b = mp3Url.readChar()) != null)
-	{
-		openedFile.write(b);
-	}
-	*/
-	System.out.println(this.getFileSize());
+  	//TODO: доделать получение строки и разбивки её на байты (getBytes())
+		while((symb = mp3Url.read()) != -1)
+		{
+			openedFile.write(symb);
+			//System.out.println(podcastFilename.length()+"/"+podcastFileSize);
+		}
+		
+		String stringFileSize = (podcastFileSize/(1024*1024))+" Мб"; 
+		System.out.println(stringFileSize);
+		openedFile.close();
   }
   
 }
