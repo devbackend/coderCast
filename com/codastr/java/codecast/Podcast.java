@@ -1,8 +1,7 @@
 package com.codastr.java.codecast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,16 +14,16 @@ import org.w3c.dom.Element;
 public class Podcast {
 
 	protected String title, link, pubDate, description, mp3;
-	protected int fileSize;	
-	
+	protected int fileSize;
+
 	public void setFileSize(int fileSize) {
 		this.fileSize = fileSize;
 	}
-	
+
 	public int getFileSize() {
 		return this.fileSize;
 	}
-	
+
     public String getTitle() {
         return title;
     }
@@ -78,27 +77,26 @@ public class Podcast {
       this.setMp3(item.getElementsByTagName("enclosure").item(0).getAttributes().item(2).getTextContent());
       this.setFileSize(Integer.parseInt(item.getElementsByTagName("enclosure").item(0).getAttributes().item(0).getTextContent()));
   }
-  
+
   //загрузка подкастов
   public void download(String directoryDestinationName) throws Exception {
-  	URLReader mp3Url = new URLReader(this.mp3);
-  	File podcastFilename = new File(directoryDestinationName+'/'+this.getTitle()+".mp3");
-  	int podcastFileSize = this.getFileSize();
-		int symb;
-		
-  	podcastFilename.createNewFile();
-  	
-  	FileOutputStream openedFile = new FileOutputStream(podcastFilename);
-  	//TODO: доделать получение строки и разбивки её на байты (getBytes())
-		while((symb = mp3Url.read()) != -1)
-		{
-			openedFile.write(symb);
-			//System.out.println(podcastFilename.length()+"/"+podcastFileSize);
-		}
-		
-		String stringFileSize = (podcastFileSize/(1024*1024))+" Мб"; 
-		System.out.println(stringFileSize);
-		openedFile.close();
+      URL connection = new URL(this.getMp3());
+      HttpURLConnection urlconn;
+      urlconn = (HttpURLConnection) connection.openConnection();
+      urlconn.setRequestMethod("GET");
+      urlconn.connect();
+      InputStream in = null;
+      in = urlconn.getInputStream();
+      OutputStream writer = new FileOutputStream(directoryDestinationName+'/'+this.getTitle()+".mp3");
+      byte buffer[] = new byte[1024];
+      int c = in.read(buffer);
+      while (c > 0) {
+          writer.write(buffer, 0, c);
+          c = in.read(buffer);
+      }
+      writer.flush();
+      writer.close();
+      in.close();
   }
-  
+
 }
